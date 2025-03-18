@@ -72,6 +72,8 @@ Styling: Make the application visually appealing with CSS. Basic styling is suff
 
 Loading State: Implement a loading indicator (e.g., a spinner or text) to show while the cat picture is being fetched from the API.
 
+Saving: Allow the user to save their favorite cat pictures and load them from storage on refresh.
+
 Error Handling: Implement basic error handling to gracefully manage potential issues such as API request failures or network errors. Display user-friendly messages in case of errors.
 
 Responsiveness: Make the application layout reasonably responsive to different screen sizes.
