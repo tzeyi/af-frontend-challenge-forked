@@ -1,6 +1,11 @@
 # Frontend Challenge: Cat Picture App
 
-# Tools
+## Run (Edit - Mar 19th)
+- docker build -t cat-app .  
+- docker run -p 8080:8080 cat-app 
+- navigate to http://localhost:8080/
+
+## Tools used (Edit - Mar 19th)
 
 1. Next.js
 2. DaisyUI
