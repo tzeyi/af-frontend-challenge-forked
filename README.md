@@ -1,5 +1,11 @@
 # Frontend Challenge: Cat Picture App
 
+# Tools
+
+1. Next.js
+2. DaisyUI
+3. TailwindCSS
+
 ## Introduction
 
 Welcome to the Artisanal Futures Frontend Challenge! This challenge is designed to assess your frontend development skills for potential student opportunities in our lab. We believe in learning by doing, and this hands-on task will give us a good understanding of your abilities in building a simple, yet functional web application.
