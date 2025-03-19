@@ -1,22 +1,36 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [catImg, setCatImg] = useState([]);
   const [newCatIndex, setNewCatIndex] = useState(0);
   // This is used to account for double click in fetchCat
   const [loading, setLoading] = useState(false); 
+
+  // Check if there are any saved cats in local storage
+  useEffect(() => {
+    const savedCatImg = localStorage.getItem("savedCatImg");
+    const savedNewCatIndex = localStorage.getItem("savedNewCatIndex");
+
+    setNewCatIndex(savedNewCatIndex ? parseInt(savedNewCatIndex) : 0);
+    setCatImg(savedCatImg ? JSON.parse(savedCatImg) : []);
+  }, [])
   
   const fetchCat = async () => {
     if (loading) return;
     setLoading(true);
 
-    // Generate a unique URL with timestamp 
-    const timestamp = new Date().getTime();
-    const catUrl = `https://cataas.com/cat?${timestamp}`;
-    
-    setCatImg(prevImg => [...prevImg, catUrl]);
+    // Fetch cat image url
+    const response = await fetch('https://cataas.com/cat?json=true');
+    const data = await response.json();
+    const catImgUrl = data.url;
+  
+    setCatImg(prevImg => {
+      const updatedImg = [...prevImg, catImgUrl];
+      localStorage.setItem("savedCatImg", JSON.stringify(updatedImg));
+      return updatedImg;
+    })
     
     setNewCatIndex(prevIndex => {
       const updatedIndex = prevIndex + 1;
@@ -26,13 +40,16 @@ export default function Home() {
         setLoading(false);
       }, 500);
       
+      localStorage.setItem("savedNewCatIndex", updatedIndex);
       return updatedIndex;
-    });
+    })
   }
 
   const clearCat = () => {
-    setCatImg([])
-    setNewCatIndex(0)
+    setCatImg([]);
+    setNewCatIndex(0);
+    localStorage.removeItem("savedCatImg");
+    localStorage.removeItem("savedNewCatIndex");
     window.location.hash = '';
   }
 
